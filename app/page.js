@@ -1,7 +1,18 @@
-import Image from "next/image";
+export default async function IndexPage({ searchParams }) {
+  const { canceled } = await searchParams
 
-export default function Home() {
+  if (canceled) {
+    console.log(
+      'Order canceled -- continue to shop around and checkout when you’re ready.'
+    )
+  }
   return (
- <h1>Stripe</h1>
-  );
+    <form action="/api/checkout_sessions" method="POST">
+      <section>
+        <button type="submit" role="link">
+          Checkout
+        </button>
+      </section>
+    </form>
+  )
 }
